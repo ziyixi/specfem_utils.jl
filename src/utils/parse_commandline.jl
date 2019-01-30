@@ -9,7 +9,7 @@ function parse_commandline()
     @add_arg_table s begin
         """--nproc_old"""
         help = "number of slices of the old mesh"
-        arg_type = Int
+        arg_type = Int64
         required = true
         """--old_mesh_dir"""
         help = "directory holds proc*_reg1_solver_data.bin"
@@ -21,7 +21,7 @@ function parse_commandline()
         required = true
         """--nproc_new"""
         help = "number of slices of the new mesh"
-        arg_type = Int32
+        arg_type = Int64
         required = true
         """--new_mesh_dir"""
         help = "directory holds proc*_reg1_solver_data.bin"
