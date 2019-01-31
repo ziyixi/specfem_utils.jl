@@ -84,8 +84,8 @@ function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::
             uvw1 = similar(xyz1)
             misloc1 = HUGEVAL
             flag_inside = false
-            xyz2cube_bounded!(xyz_anchor[:,:,ispec], xyz1, uvw1, misloc1, flag_inside)
-
+            misloc1, flag_inside = xyz2cube_bounded!(xyz_anchor[:,:,ispec], xyz1, uvw1, misloc1, flag_inside)
+            @info "debug3" xyz1[1] xyz1[2] xyz1[3] uvw1[1] uvw1[2] uvw1[3] misloc1 flag_inside
             if flag_inside == true
                 location_result[ipoint].stat = 1
                 location_result[ipoint].eid = ispec
