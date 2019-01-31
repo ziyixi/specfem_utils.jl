@@ -140,7 +140,7 @@ end
 
 function sem_io_write_gll_file_n(basedir::String, iproc::Int64, model_names::Vector{String}, nmodel::Int64, model_gll::Array{Float64,5})
     for imodel = 1:nmodel
-        sem_io_write_gll_file_1(basedir, iproc, model_names[imodel], model_gll[imodle,:,:,:,:])
+        sem_io_write_gll_file_1(basedir, iproc, model_names[imodel], model_gll[imodel,:,:,:,:])
     end
 end
 
