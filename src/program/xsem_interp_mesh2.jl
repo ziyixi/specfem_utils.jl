@@ -151,7 +151,8 @@ function main()
     command_args = parse_commandline()
     
     run_interp(myrank, nrank, command_args)
-
+    
+    MPI.Barrier(comm)
     MPI.Finalize()
 end
 
