@@ -26,6 +26,8 @@ function xyz2cube_bounded!(xyz_anchor::Array{Float64,2}, xyz::Array{Float64,1}, 
     misloc_ref = Ref{Float64}(misloc)
     flag_inside_ref = Ref{Bool}(flag_inside)
     ccall((:xyz2cube_bounded_, "./fortran/lib/sem_mesh_mod.so"), Cvoid, (Ptr{Float64}, Ptr{Float64}, Ptr{Float64}, Ref{Float64}, Ref{Bool}), xyz_anchor, xyz, uvw, misloc_ref, flag_inside_ref)
+    misloc = misloc_ref.x
+    flag_inside = flag_inside_ref.x
 end
 
 # sem_mesh_mod

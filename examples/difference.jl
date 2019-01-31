@@ -2,10 +2,10 @@ include("../src/utils/readfiles.jl")
 
 function get_difference_1(tag::String)
     me_basedir = "/work/05880/tg851791/stampede2/model/model_interp/debug/test_me"
-    s362ani_basedir = "/work/05880/tg851791/stampede2/specfem/20190115/tao_h_files/DATABASES_MPI"
+    s362ani_basedir = "/work/05880/tg851791/stampede2/model/model_interp/debug/tapreg_adds363ani_addtaosmooth"
 
-    nproc = 336
-    nspec = 4960
+    nproc = 441
+    nspec = 4480
     me_gll = zeros(Float64, NGLLX, NGLLY, NGLLZ, nspec, nproc)
     s362ani_gll = zeros(Float64, NGLLX, NGLLY, NGLLZ, nspec, nproc)
     dummy = zeros(Float64, NGLLX, NGLLY, NGLLZ, nspec)

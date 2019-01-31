@@ -55,3 +55,5 @@ function find_abnormal_number(tag::String)
     end
     return thecount
 end
+
+# ibrun julia src/program/xsem_interp_mesh2.jl --nproc_old 336 --old_mesh_dir /work/05880/tg851791/stampede2/model/FWEA18_ref --old_model_dir /work/05880/tg851791/stampede2/model/FWEA18_smooth --nproc_new 441 --new_mesh_dir /work/05880/tg851791/stampede2/specfem/20190115/simulation_taoreg/DATABASES_MPI --new_model_dir /work/05880/tg851791/stampede2/specfem/20190115/simulation_taoreg/DATABASES_MPI --model_tags eta,rho,vph,vpv,vsh,vsv --output_dir /work/05880/tg851791/stampede2/model/model_interp/debug/test_me
