@@ -3,7 +3,7 @@ include("../types/types.jl")
 include("../setting/constants.jl")
 include("./fortran_call.jl")
 
-function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::Array{Float64,2}, idoubling::Vector{Int64}, nnearest::Int64, max_search_dist::Float64, max_misloc::Float64)::sem_mesh_location
+function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::Array{Float64,2}, idoubling::Vector{Int64}, nnearest::Int64, max_search_dist::Float64, max_misloc::Float64)
     # * init result
     location_result = Vector{sem_mesh_location}(undef, npoint)
     for i in 1:npoint
@@ -118,4 +118,5 @@ function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::
         end
 
     end  
+    return location_result
 end
