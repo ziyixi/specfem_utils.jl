@@ -5,7 +5,7 @@ include("../utils/readfiles.jl")
 include("../utils/kdtree.jl")
 include("../utils/parse_commandline.jl")
 
-function run_interp(myrank::Int64, nrank::Int64, command_args::String)
+function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
     # * init some variables
     isroot = (myrank == 0)
     nproc_old = command_args["nproc_old"]

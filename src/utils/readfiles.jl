@@ -8,8 +8,8 @@ function sem_mesh_read(basedir::String, iproc::Int64)
     mesh_data = sem_mesh_data()
     f = sem_io_open_file_for_read(basedir, iproc, "solver_data") 
 
-    nspec = read(f, Int32)
-    nglob = read(f, Int32)
+    nspec = Int64(read(f, Int32))
+    nglob = Int64(read(f, Int32))
 
     sem_mesh_init!(mesh_data, nspec, nglob)
     mesh_data.nspec = Int64(nspec)
@@ -24,9 +24,19 @@ function sem_mesh_read(basedir::String, iproc::Int64)
     mesh_data.xyz_glob[2,:] .= Float64.(dummy)
     read(f, dummy)
     mesh_data.xyz_glob[3,:] .= Float64.(dummy)
-    read(f, mesh_data.ibool)
-    read(f, mesh_data.idoubling)
-    read(f, mesh_data.ispec_is_tiso)
+
+    dummy_int1 = similar(Int32, mesh_data.ibool)
+    read(f, dummy_int1)
+    mesh_data.ibool = Int64.(dummy_int1)
+
+    dummy_int2 = similar(Int32, mesh_data.idoubling)
+    read(f, dummy_int2)
+    mesh_data.idoubling = Int64.(dummy_int2)
+
+    dummy_int3 = similar(Int32, mesh_data.ispec_is_tiso)
+    read(f, dummy_int3)
+    mesh_data.ispec_is_tiso = Int64.(dummy_int3)
+
     read(f, dummy4)
     mesh_data.xix .= Float64.(dummy4)
     read(f, dummy4)
