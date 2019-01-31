@@ -22,7 +22,7 @@ function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
     mesh_old = sem_mesh_data()
 
     # * parse model tags 
-    model_names = split(model_tags, ",")
+    model_names = String.(split(model_tags, ","))
     nmodel = length(model_names)
     if isroot
         @info "[$(myrank)]# nmodel=$(nmodel)"
@@ -77,7 +77,7 @@ function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
         model_interp = zeros(nmodel, ngll_new)
 
         # * read in the new model as the background model
-        model_gll_new = zeros(Float64.NGLLX, NGLLY, NGLLZ, nspec_new)
+        model_gll_new = zeros(Float64, nmodel, NGLLX, NGLLY, NGLLZ, nspec_new)
         sem_io_read_gll_file_n!(new_model_dir, iproc_new, model_names, nmodel, model_gll_new)
 
         # * loop each slices of the old mesh
@@ -98,7 +98,7 @@ function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
             end
 
             # read old model
-            model_gll_old = zeros(Float64.NGLLX, NGLLY, NGLLZ, nspec_old)
+            model_gll_old = zeros(Float64, nmodel, NGLLX, NGLLY, NGLLZ, nspec_old)
             sem_io_read_gll_file_n!(old_model_dir, iproc_old, model_names, nmodel, model_gll_old)
 
             # locate points in this mesh slice

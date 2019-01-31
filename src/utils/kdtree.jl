@@ -43,7 +43,7 @@ function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::
 
     for ispec = 1:nspec
         for ia = 1:NGNOD
-            iglob = mesh_data.ibool(iax[ia], iay[ia], iaz[ia], ispec)
+            iglob = mesh_data.ibool[iax[ia], iay[ia], iaz[ia], ispec]
             xyz_anchor[:,ia,ispec] = mesh_data.xyz_glob[:,iglob]
         end
         # the last anchor point is the element center
@@ -81,12 +81,10 @@ function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::
             end
 
             # locate point to this element
-            dummy = similar(xyz_anchor[:,:,1])
             uvw1 = similar(xyz1)
             misloc1 = HUGEVAL
             flag_inside = false
-            xyz2cube_bounded!(dummy, xyz1, uvw1, misloc1, flag_inside)
-            xyz_anchor[:,:,ispec] = dummy
+            xyz2cube_bounded!(xyz_anchor[:,:,ispec], xyz1, uvw1, misloc1, flag_inside)
 
             if flag_inside == true
                 location_result[ipoint].stat = 1

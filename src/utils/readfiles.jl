@@ -25,17 +25,15 @@ function sem_mesh_read(basedir::String, iproc::Int64)
     read(f, dummy)
     mesh_data.xyz_glob[3,:] .= Float64.(dummy)
 
-    dummy_int1 = similar(Int32, mesh_data.ibool)
+    dummy_int1 = similar(mesh_data.ibool, Int32)
     read(f, dummy_int1)
     mesh_data.ibool = Int64.(dummy_int1)
 
-    dummy_int2 = similar(Int32, mesh_data.idoubling)
+    dummy_int2 = similar(mesh_data.idoubling, Int32)
     read(f, dummy_int2)
     mesh_data.idoubling = Int64.(dummy_int2)
 
-    dummy_int3 = similar(Int32, mesh_data.ispec_is_tiso)
-    read(f, dummy_int3)
-    mesh_data.ispec_is_tiso = Int64.(dummy_int3)
+    read(f, mesh_data.ispec_is_tiso)
 
     read(f, dummy4)
     mesh_data.xix .= Float64.(dummy4)
@@ -141,7 +139,7 @@ function sem_io_read_gll_file_n!(basedir::String, iproc::Int64, model_names::Vec
 end
 
 function sem_io_write_gll_file_n(basedir::String, iproc::Int64, model_names::Vector{String}, nmodel::Int64, model_gll::Array{Float64,5})
-    for imodle = 1:nmodel
+    for imodel = 1:nmodel
         sem_io_write_gll_file_1(basedir, iproc, model_names[imodel], model_gll[imodle,:,:,:,:])
     end
 end
