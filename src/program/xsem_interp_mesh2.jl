@@ -110,7 +110,7 @@ function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
                     @info "[$(myrank)]# multi-located, $(xyz_new[:,igll])"
                     continue
                 end
-                @info "bug2" location_1slice[igll].stat location_1slice[igll].misloc misloc_final[igll]
+                # @info "bug2" location_1slice[igll].stat location_1slice[igll].misloc misloc_final[igll]
                 # for point located inside one element in the first time or closer to one element than located before
                 if location_1slice[igll].stat == 1 || (location_1slice[igll].stat == 0 && location_1slice[igll].misloc < misloc_final[igll])
                     for imodel = 1:nmodel
@@ -119,10 +119,10 @@ function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
                     stat_final[igll] = location_1slice[igll].stat
                     misloc_final[igll] = location_1slice[igll].misloc
                 end
-                if location_1slice[igll].stat == 1 || (location_1slice[igll].stat == 0 && location_1slice[igll].misloc < misloc_final[igll])
+                # if location_1slice[igll].stat == 1 || (location_1slice[igll].stat == 0 && location_1slice[igll].misloc < misloc_final[igll])
                     # @info "bug1" igll model_interp[3,igll] location_1slice[igll] model_gll_old[3,:,:,:,location_1slice[igll].eid] stat_final[igll] misloc_final[igll]
-                    flag = false
-                end
+                    # flag = false
+                # end
             end
         end
 
