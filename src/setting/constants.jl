@@ -7,7 +7,7 @@ const NEX_ETA_VAL = 24
 const REGIONAL_MOHO_MESH = true
 
 # some constant values
-const R_UNIT_SPHERE = 6371.00
+const R_UNIT_SPHERE = one(Float64)
 const NGLLX = 5
 const NGLLY = 5
 const NGLLZ = 5

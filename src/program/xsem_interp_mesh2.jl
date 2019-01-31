@@ -93,7 +93,7 @@ function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
                 min_dist = min(min_dist, sqrt(minimum((xyz_center_new[1,:] .- mesh_old.xyz_glob[1,iglob]).^2 + (xyz_center_new[2,:] .- mesh_old.xyz_glob[2,iglob]).^2 + (xyz_center_new[3,:] .- mesh_old.xyz_glob[3,iglob]).^2)))
             end
             if min_dist > max_search_dist
-                @info "[$(myrank)]# old/new slices too far away, skip"
+                @info "[$(myrank)]# $(iproc_old)/$(iproc_new) slices too far away, skip"
                 continue
             end
 
