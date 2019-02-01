@@ -1,4 +1,6 @@
 import MPI
+using ASTInterpreter2
+
 include("../types/types.jl")
 include("../setting/constants.jl")
 include("../utils/readfiles.jl")
@@ -121,43 +123,47 @@ function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
                 # if location_1slice[igll].stat == 1 || (location_1slice[igll].stat == 0 && location_1slice[igll].misloc < misloc_final[igll])
                     # flag = false
                 # end
+                if igll == 0
+                    @info  "@@@@@@@"
+                    @info location_1slice[igll] model_gll_old[3,:,:,:,location_1slice[igll].eid] model_interp[3,igll]
+                    @info "@@@@@@"
+                end
             end
-        end
 
         # * write out gll files for this new mesh slice
 
         # reshape model_interp to model_gll
-        for ispec = 1:nspec_new
-            for igllz = 1:NGLLZ
-                for iglly = 1:NGLLY
-                    for igllx = 1:NGLLX
-                        igll = igllx + NGLLX * ( (iglly - 1) + NGLLY * ( (igllz - 1) + NGLLZ * ( (ispec - 1))))
-                        if stat_final[igll] != -1
-                            model_gll_new[:,igllx,iglly,igllz,ispec] = model_interp[:,igll]
+            for ispec = 1:nspec_new
+                for igllz = 1:NGLLZ
+                    for iglly = 1:NGLLY
+                        for igllx = 1:NGLLX
+                            igll = igllx + NGLLX * ( (iglly - 1) + NGLLY * ( (igllz - 1) + NGLLZ * ( (ispec - 1))))
+                            if stat_final[igll] != -1
+                                model_gll_new[:,igllx,iglly,igllz,ispec] = model_interp[:,igll]
+                            end
                         end
                     end
                 end
             end
+            sem_io_write_gll_file_n(output_dir, iproc_new, model_names, nmodel, model_gll_new)
         end
-        sem_io_write_gll_file_n(output_dir, iproc_new, model_names, nmodel, model_gll_new)
     end
-end
 
 
 
 
-function main()
-    MPI.Init()
+    function main()
+        MPI.Init()
 
-    comm = MPI.COMM_WORLD
-    myrank = MPI.Comm_rank(comm)
-    nrank = MPI.Comm_size(comm)
-    command_args = parse_commandline()
+        comm = MPI.COMM_WORLD
+        myrank = MPI.Comm_rank(comm)
+        nrank = MPI.Comm_size(comm)
+        command_args = parse_commandline()
     
-    run_interp(myrank, nrank, command_args)
+        run_interp(myrank, nrank, command_args)
     
-    MPI.Barrier(comm)
-    MPI.Finalize()
-end
+        MPI.Barrier(comm)
+        MPI.Finalize()
+    end
 
-main()
+    main()
