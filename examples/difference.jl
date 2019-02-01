@@ -15,7 +15,6 @@ function get_difference_1(tag::String)
         me_gll[:,:,:,:,iproc + 1] = dummy
         sem_io_read_gll_file_1!(s362ani_basedir, iproc, tag, dummy)
         s362ani_gll[:,:,:,:,iproc + 1] = dummy
-        # @info all(tao_gll[:,:,:,:,iproc + 1] .== 0), all(s362ani_gll[:,:,:,:,iproc + 1] .== 0)
     end
-    return s362ani_gll - me_gll
+    return s362ani_gll - me_gll, s362ani_gll, me_gll
 end

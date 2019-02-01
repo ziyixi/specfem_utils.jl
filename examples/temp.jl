@@ -17,7 +17,6 @@ function get_difference_tao(tag::String)
         tao_gll[:,:,:,:,iproc + 1] = dummy
         sem_io_read_gll_file_1!(s362ani_basedir, Int32(iproc), tag, dummy)
         s362ani_gll[:,:,:,:,iproc + 1] = dummy
-        # @info all(tao_gll[:,:,:,:,iproc + 1] .== 0), all(s362ani_gll[:,:,:,:,iproc + 1] .== 0)
     end
     return tao_gll .- s362ani_gll
 end

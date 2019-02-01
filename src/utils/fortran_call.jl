@@ -15,7 +15,6 @@ function anchor_point_index!(iax::Vector{Int32}, iay::Vector{Int32}, iaz::Vector
     iaz_32 = Int32.(iaz)
     @assert length(iax) == 27 && length(iay) == 27 && length(iaz) == 27
     ccall((:anchor_point_index_, "./fortran/lib/sem_mesh_mod.so"), Cvoid, (Ptr{Int32}, Ptr{Int32}, Ptr{Int32}), iax_32, iay_32, iaz_32)
-    # @info iax_32
     iax .= Int32.(iax_32)
     iay .= Int32.(iay_32)
     iaz .= Int32.(iaz_32)
