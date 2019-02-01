@@ -59,7 +59,6 @@ function sem_mesh_read(basedir::String, iproc::Int64)
     # separate crustal mesh layers for REGIONAL_MOHO_MESH 
     # 3-layer crust: 10(third layer), 11, 12(shallowest layer)
     if REGIONAL_MOHO_MESH
-        @info "# separate crustal mesh into 3 layers for REGIONAL_MOHO_MESH=$(REGIONAL_MOHO_MESH)"
         num = 0
         for ispec = 1:nspec
             if mesh_data.idoubling[ispec] == IFLAG_CRUST
@@ -72,7 +71,6 @@ function sem_mesh_read(basedir::String, iproc::Int64)
 
     # separate mesh layers across 410-km
     # 40: above 410, 41: below 410
-    @info "# separate mesh layer at 410km"
     for ispec = 1:nspec
         if mesh_data.idoubling[ispec] == IFLAG_670_220
             iglob = mesh_data.ibool[MIDX, MIDY, MIDZ, ispec]
