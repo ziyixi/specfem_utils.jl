@@ -59,6 +59,7 @@ function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::
         location_result[i].eid = -1
         location_result[i].misloc = HUGEVAL
         location_result[i].lagrange = zeros(Float64, NGLLX, NGLLY, NGLLZ)
+        location_result[i].uvw = zeros(Float64, 3)
     end
 
     # loop points
@@ -72,6 +73,10 @@ function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::
             ispec = idxs[inn]
             # skip the element a certain distance away
             dist = sqrt(sum((xyz_elem[:,ispec] .- xyz1).^2))
+            # if (ipoint == 492835) 
+            #     @info "@@@@"
+            #     @info dist, max_search_dist, inn
+            # end
             if dist > max_search_dist
                 continue
             end
@@ -86,6 +91,10 @@ function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::
             misloc1 = HUGEVAL
             flag_inside = false
             misloc1, flag_inside = xyz2cube_bounded!(xyz_anchor[:,:,ispec], xyz1, uvw1, misloc1, flag_inside)
+            # if (ipoint == 492835) 
+            #     @info "@@@@"
+            #     @info flag_inside, misloc1, uvw1, ispec
+            # end
             if flag_inside == true
                 location_result[ipoint].stat = 1
                 location_result[ipoint].eid = ispec
@@ -117,16 +126,17 @@ function sem_mesh_locate_kdtree2!(mesh_data::sem_mesh_data, npoint::Int64, xyz::
             end
         end
         #to debug
-        if ipoint == 492835
-            @info "@@@@"
-            @info iproc_old
-            @info xyz1
-            @info idxs
-            @info hlagx
-            @info hlagy
-            @info hlagz
-            @info "@@@@"
-        end
+        # if (ipoint == 492835) && (location_result[ipoint].stat != -1)
+        #     @info "@@@@"
+        #     @info iproc_old
+        #     @info xyz1
+        #     @info idxs
+        #     @info hlagx
+        #     @info hlagy
+        #     @info hlagz
+        #     @info location_result[ipoint].uvw
+        #     @info "@@@@"
+        # end
     end  
     return location_result
 end

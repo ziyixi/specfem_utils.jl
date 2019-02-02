@@ -62,7 +62,7 @@ function sem_mesh_read(basedir::String, iproc::Int64)
         num = 0
         for ispec = 1:nspec
             if mesh_data.idoubling[ispec] == IFLAG_CRUST
-                id = fld(num, 3)
+                id = num - fld(num, 3) * 3
                 mesh_data.idoubling[ispec] = 10 * IFLAG_CRUST + id 
                 num = num + 1
             end

@@ -41,9 +41,9 @@ function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
 
     # * loop each new mesh slice (where MPI parallels)
     for iproc_new in myrank:nrank:(nproc_new - 1)
-        if iproc_new != 386
-            continue
-        end
+        # if iproc_new != 386
+        #     continue
+        # end
         @info "[$(myrank)]# iproc_new=$(iproc_new)"
 
         # * read new mesh slice
