@@ -25,7 +25,7 @@ end
 generate the real vaue bin file based on reference model and perturbation bin file
 """
 function generate_real(target_basedir::String, reference_basedir::String, output_basedir::String, nproc::Int64, nspec::Int64)
-    tags = ["vp","vph","vpv","vs","vsh","vsv","eta","qmu","rho"]
+    tags = ["vph","vpv","vsh","vsv","eta","qmu","rho"]
     model_gll_reference = zeros(Float64, NGLLX, NGLLY, NGLLZ, nspec)
     model_gll_target = zeros(Float64, NGLLX, NGLLY, NGLLZ, nspec)
     model_gll_output = zeros(Float64, NGLLX, NGLLY, NGLLZ, nspec)
