@@ -5,7 +5,7 @@ include("../src/setting/constants.jl")
 generate perturbation file according to the reference bin file
 """
 function generate_perturbation(target_basedir::String, reference_basedir::String, output_basedir::String, nproc::Int64, nspec::Int64)
-    tags = ["vp","vph","vpv","vs","vsh","vsv","eta","qmu","rho"]
+    tags = ["vph","vpv","vsh","vsv","eta","qmu","rho"]
     model_gll_reference = zeros(Float64, NGLLX, NGLLY, NGLLZ, nspec)
     model_gll_target = zeros(Float64, NGLLX, NGLLY, NGLLZ, nspec)
     model_gll_output = zeros(Float64, NGLLX, NGLLY, NGLLZ, nspec)
