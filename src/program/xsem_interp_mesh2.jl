@@ -47,7 +47,7 @@ function run_interp(myrank::Int64, nrank::Int64, command_args::Dict{String,Any})
         @info "[$(myrank)]# iproc_new=$(iproc_new)"
 
         # * read new mesh slice
-        mesh_new = sem_mesh_read(new_model_dir, iproc_new)
+        mesh_new = sem_mesh_read(new_mesh_dir, iproc_new)
         nspec_new = mesh_new.nspec
         ngll_new = NGLLX * NGLLY * NGLLZ * nspec_new
 
