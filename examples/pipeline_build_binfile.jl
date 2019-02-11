@@ -26,3 +26,21 @@ function generate_my_perturbation()
     nspec = 4480
     generate_perturbation(url_background_binfile, url_reference_with_correctcrust, url_output, nproc, nspec)
 end
+
+function recover_tao()
+    url_reference_with_correctcrust = "/work/05880/tg851791/stampede2/specfem/20190115/simulation_taoreg/DATABASES_MPI"
+    url_tao_perturbation = "/scratch/05880/tg851791/binfile/interp/s362ani_addtao-pert"
+    url_output = "/scratch/05880/tg851791/binfile/gll/bg-tao"
+    nproc = 441
+    nspec = 4480
+    generate_real(url_tao_perturbation, url_reference_with_correctcrust, url_output, nproc, nspec)
+end
+
+function recover_min()
+    url_reference_with_correctcrust = "/work/05880/tg851791/stampede2/specfem/20190115/simulation_taoreg/DATABASES_MPI"
+    url_min_perturbation = "/scratch/05880/tg851791/binfile/interp/s362ani_addtao_addmin-pert"
+    url_output = "/scratch/05880/tg851791/binfile/gll/bg-tao-min"
+    nproc = 441
+    nspec = 4480
+    generate_real(url_min_perturbation, url_reference_with_correctcrust, url_output, nproc, nspec)
+end
