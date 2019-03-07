@@ -73,3 +73,8 @@ def setup_structure(wbase, sbase, specfem, taogll, mingll):
           join(wbase, "control_file", "min"))
     sh.ln("-s", join(wbase, "specfem", "tao", "DATABASES_MPI"),
           join(wbase, "control_file", "tao"))
+
+
+if __name__ == "__main__":
+    wbase, sbase, specfem, taogll, mingll = get_args(sys.argv[1:])
+    setup_structure(wbase, sbase, specfem, taogll, mingll)
